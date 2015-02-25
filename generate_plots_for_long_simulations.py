@@ -26,9 +26,9 @@ else:
 #choose the cases that need to be plotted
 Para.Gov=gov
 Eps= pickle.load(open('Eps.pickle'))
-data_simulation_b= pickle.load(open('data_simulation3.pickle'))
-data_simulation0= pickle.load(open('data_simulation0.pickle'))
-data_simulation1= pickle.load(open('data_simulation6.pickle'))
+data_simulation_b= pickle.load(open('data_simulation_new3.pickle'))
+data_simulation0= pickle.load(open('data_simulation_new0.pickle'))
+data_simulation1= pickle.load(open('data_simulation_new6.pickle'))
 
 Gamma2,Z2,Y2,Shocks2,y2=data_simulation0
 Gamma,Z,Y,Shocks,y=data_simulation_b
@@ -85,9 +85,9 @@ def get_chi(y,Y,t):
     
 
 f,(ax1,ax2,ax3) =plt.subplots(3,1,sharex='col')
-lines_taxes=ax2.plot(np.vstack(np.array((map(lambda t: Y[t][3],range(0,T-2,4)),map(lambda t: Y2[t][3],range(0,T-2,4)),map(lambda t: Y3[t][3],range(0,T-2,4))))).T)
-lines_debt=ax1.plot(np.vstack((map(lambda t: GovernmentDebt(y[t]),range(0,T-2,4)),map(lambda t: GovernmentDebt(y2[t]),range(0,T-2,4)),map(lambda t: GovernmentDebt(y3[t]),range(0,T-2,4)))).T)
-lines_transfers=ax3.plot(np.vstack(np.array((map(lambda t: Transfers(y,Y,t),range(0,T-2,4)),map(lambda t: Transfers(y2,Y,t),range(0,T-2,4)),map(lambda t: Transfers(y3,Y,t),range(0,T-2,4))))).T)
+lines_taxes=ax2.plot(range(0,T-2,4),np.vstack(np.array((map(lambda t: Y[t][3],range(0,T-2,4)),map(lambda t: Y2[t][3],range(0,T-2,4)),map(lambda t: Y3[t][3],range(0,T-2,4))))).T)
+lines_debt=ax1.plot(range(0,T-2,4),np.vstack((map(lambda t: GovernmentDebt(y[t]),range(0,T-2,4)),map(lambda t: GovernmentDebt(y2[t]),range(0,T-2,4)),map(lambda t: GovernmentDebt(y3[t]),range(0,T-2,4)))).T)
+lines_transfers=ax3.plot(range(0,T-2,4),np.vstack(np.array((map(lambda t: Transfers(y,Y,t),range(0,T-2,4)),map(lambda t: Transfers(y2,Y,t),range(0,T-2,4)),map(lambda t: Transfers(y3,Y,t),range(0,T-2,4))))).T)
 ax2.set_title(r'taxes-rates')
 ax1.set_title(r'debt-gdp ratio')
 ax3.set_title(r'transfers-gdp')
@@ -110,4 +110,4 @@ ax1.locator_params(nbins=6)
 ax2.locator_params(nbins=5)
 ax3.locator_params(nbins=5)
 
-plt.savefig('long_simulation_debt.png',dpi=300)        
+plt.savefig('long_simulation_new_debt.png',dpi=300)        

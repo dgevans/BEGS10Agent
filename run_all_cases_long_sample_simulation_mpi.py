@@ -50,7 +50,7 @@ def run_simulation(ex,Gamma0,Eps): ## function to run all cases with MPI and sto
         simulate.simulate_aggstate(Para,Gamma,Z,Y,Shocks,y,T-1,agg_shocks= Eps)    
             
     
-    data_simulation=Gamma,Z,Y,Shocks,y 
+    data_simulation=Gamma,Z,Y,Shocks,y,Case[ex] 
     with open('data_simulation_new'+str(ex)+'.pickle', 'wb') as f:
         pickle.dump(data_simulation, f)
     
@@ -75,17 +75,17 @@ else:
 
 Gamma[0]=Gamma0
 N=len(thetas)
-T=3000   
+T=5000   
 
 # List all the cases
 chi_grid=np.array([-1.50,-1.0,-.5,-0.06,.5,1.0,1.5])
-conditional_mean_flag=np.array([0])
+conditional_mean_flag=np.array([0,1])
 ineq_shocks_flag=np.array([1])
 Case={}
 k=0
-for i in range(len(chi_grid)):
-    for j in range(len(conditional_mean_flag)):
-        for h in range(len(ineq_shocks_flag)):
+for j in range(len(conditional_mean_flag)):
+    for h in range(len(ineq_shocks_flag)):
+        for i in range(len(chi_grid)):
             Case[k]=[chi_grid[i],conditional_mean_flag[j],ineq_shocks_flag[h]]
             k=k+1 
 
