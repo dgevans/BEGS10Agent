@@ -89,19 +89,25 @@ for j in range(len(conditional_mean_flag)):
             Case[k]=[chi_grid[i],conditional_mean_flag[j],ineq_shocks_flag[h]]
             k=k+1 
 
-
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
 # common shocks, store them
-Eps = np.random.randn(T)
-Eps=np.minimum(3.,np.maximum(-3.,Eps))
-with open('Eps.pickle', 'wb') as f:
+if rank ==0:
+    Eps = np.random.randn(T)
+    Eps=np.minimum(3.,np.maximum(-3.,Eps))
+    with open('Eps.pickle', 'wb') as f:
                pickle.dump(Eps, f)
+else:
+    Eps = None
+
+Eps = comm.bcast(Eps) #ALl using same Shocks    
+
    
    
 # run all cases using MPI   
 start = time.clock()
 X=range(len(Case))
-comm = MPI.COMM_WORLD
-rank = comm.Get_rank()
+
 s = comm.Get_size() #gets the number of processors
 nX = len(X)/s
 r = len(X)%s

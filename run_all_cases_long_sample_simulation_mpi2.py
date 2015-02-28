@@ -91,7 +91,7 @@ for j in range(len(conditional_mean_flag)):
 
 
 # common shocks, store them
-#Eps = np.random.randn(T)
+Eps = np.random.randn(T)
 #Eps=np.minimum(3.,np.maximum(-3.,Eps))
 #with open('Eps.pickle', 'wb') as f:
 #               pickle.dump(Eps, f)
