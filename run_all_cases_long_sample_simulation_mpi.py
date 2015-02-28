@@ -38,7 +38,7 @@ def run_simulation(ex,Gamma0,Eps): ## function to run all cases with MPI and sto
     if inequlity_shock_flag==0:
        Para.ineq_slope=0  
     else:
-       Para.ineq_slope= 0.5/0.6
+       Para.ineq_slope= 1.0/0.8
         
     approximate.calibrate(Para)
     simulate.approximate = approximate
@@ -79,7 +79,7 @@ T=5000
 
 # List all the cases
 chi_grid=np.array([-1.50,-1.0,-.5,-0.06,.5,1.0,1.5])
-conditional_mean_flag=np.array([0,1])
+conditional_mean_flag=np.array([0])
 ineq_shocks_flag=np.array([1])
 Case={}
 k=0
